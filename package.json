@@ -1,0 +1,7 @@
+{
+  "name": "@wcd/jorge-luna-salesforce.gantt-poc-phase2",
+  "version": "0.0.0",
+  "scripts": {
+    "serve": "npx wcd-cli@latest serve a0tPSH1r11XHKlVWXKH1 --open"
+  }
+}
