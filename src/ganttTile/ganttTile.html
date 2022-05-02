@@ -1,0 +1,7 @@
+<template>
+  <template for:each={tilesInSlot} for:item="tile">
+    <div class={tileClass} style={tile.style} tabindex="0" key={tile.id}>
+      <p class="slds-truncate">{tile.label}</p>
+    </div>
+  </template>
+</template>

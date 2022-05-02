@@ -1,0 +1,33 @@
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>54.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Gantt</masterLabel>
+    <description>Gantt</description>
+    <targets>
+        <target>lightning__AppPage</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__AppPage">
+            <orgAccess>FieldService.orgHasFieldService</orgAccess>
+            <userAccess value="FieldService.userHasFieldService"/>
+            <property name="groupCount" type="Integer"/>
+            <property name="subGroupCount" type="Integer"/>
+            <property name="range" type="Integer"/>
+            <property name="rangeUnit" type="String" datasource="day,hour"/>
+            <property name="interval" type="Integer"/>
+            <property name="intervalUnit" type="String" datasource="minute,hour,day"/>
+            <designLayout>
+                <designSection name="details">
+                    <designLayoutItems>
+                        <designLayoutProperty name="groupCount" />
+                        <designLayoutProperty name="subGroupCount" />
+                        <designLayoutProperty name="range" />
+                        <designLayoutProperty name="rangeUnit" />
+                        <designLayoutProperty name="interval" />
+                        <designLayoutProperty name="intervalUnit" />
+                    </designLayoutItems>
+                </designSection>
+            </designLayout>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>

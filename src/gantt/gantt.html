@@ -1,0 +1,91 @@
+<template>
+  <!-- START Configuration UI -->
+  <div class="slds-m-bottom_small">
+    <lightning-button label={switchLabel} title="Switch" onclick={handleSwitch}></lightning-button>
+  </div>
+  <div data-id="attributes" class="slds-box slds-theme_default slds-m-bottom_small slds-hide">
+    <div class="slds-text-heading_medium slds-align_absolute-center">Attributes</div>
+    <div class="slds-grid">
+      <div class="slds-col slds-m-right_small">
+        <lightning-input type="range" label="Range" min="1" max="10" value={range} onchange={handleRangeChange}> </lightning-input>
+        <lightning-input type="range" label="Interval" min="1" max="80" value={interval} onchange={handleIntervalChange}></lightning-input>
+      </div>
+      <div class="slds-col slds-m-right_small">
+        <lightning-combobox
+          name="rangeUnit"
+          label="Range Unit"
+          value={rangeUnit}
+          placeholder="Select Range Unit"
+          options={rangeUnitOptions}
+          onchange={handleRangeUnitChange}
+        >
+        </lightning-combobox>
+        <lightning-combobox
+          name="intervalUnit"
+          label="Interval Unit"
+          value={intervalUnit}
+          placeholder="Select Interval Unit"
+          options={intervalUnitOptions}
+          onchange={handleIntervalUnitChange}
+        >
+        </lightning-combobox>
+      </div>
+      <div class="slds-col slds-m-right_small">
+        <div class="slds-text-body_regular">range: {range}</div>
+        <div class="slds-text-body_regular">interval: {interval}</div>
+      </div>
+      <div class="slds-col">
+        <div class="slds-text-body_regular">rangeUnit: {rangeUnit}</div>
+        <div class="slds-text-body_regular">intervalUnit: {intervalUnit}</div>
+      </div>
+    </div>
+  </div>
+  <!-- END Configuration UI -->
+
+  <!-- implementaiton with table -->
+  <div class="slds-box slds-theme_default slds-m-bottom_small">
+    <!-- slds-table slds-table_bordered slds-table_col-bordered slds-no-row-hover -->
+    <div class="">
+      <table class="fixed">
+        <tr>
+          <!-- empty header -->
+          <th rowspan="2" class="slds-text-align_center"></th>
+          <!-- interval header -->
+          <template for:each={rangeData} for:item="range">
+            <th class="slds-text-align_center" colspan={colSpanForRange} key={range.id}>{rangeUnit} {range.id}</th>
+          </template>
+        </tr>
+        <!-- intervals -->
+        <tr key={row}>
+          <template for:each={timeSlots} for:item="timeSlot">
+            <td class="slds-text-align_left" key={timeSlot.id}>
+              <p class="slds-truncate">{timeSlot.start}-{timeSlot.end} {intervalUnit}</p>
+            </td>
+          </template>
+        </tr>
+        <template for:each={groupsData} for:item="group">
+          <!-- group -->
+          <tr key={group.id} class="group-style">
+            <td class="slds-text-align_left" colspan={colSpanForGroup} tabindex="0">
+              <c-group-expandable group={group} ongroupclick={handleGroupClick}></c-group-expandable>
+            </td>
+          </tr>
+          <template if:true={group.expanded}>
+            <template for:each={group.subGroups} for:item="subGroup">
+              <tr key={subGroup.id}>
+                <!-- sub group -->
+                <td class="slds-text-align_center" colspan={colSpanForSubGroup} tabindex="0">{subGroup.name}</td>
+                <!-- slots -->
+                <template for:each={timeSlots} for:item="timeSlot">
+                  <td key={timeSlot.id} class="tile-container">
+                    <c-gantt-tile class="tile" tile-data={subGroup.slots} time-slot={timeSlot} interval={interval}> </c-gantt-tile>
+                  </td>
+                </template>
+              </tr>
+            </template>
+          </template>
+        </template>
+      </table>
+    </div>
+  </div>
+</template>

@@ -1,0 +1,28 @@
+table,
+th,
+td {
+  border: 1px solid black;
+}
+
+table.fixed {
+  table-layout: fixed;
+}
+
+table.fixed td {
+  overflow: visible;
+}
+
+.tile-container {
+  position: relative;
+  vertical-align: top;
+}
+
+.group-style {
+  background-color: gray;
+  color: white;
+}
+
+.group-style td {
+  padding: 10px;
+  font-size: medium;
+}
